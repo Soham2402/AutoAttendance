@@ -4,7 +4,7 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 import os
 
-# Capitlizing all names
+# converting all names into lowercase 
 def lower(studentlist):
     for name in studentlist:
         studentlist[studentlist.index(name)] = name.lower()
