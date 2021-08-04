@@ -8,7 +8,7 @@ import openpyxl
 import os
 import time
 
-# Capitlizing all names
+# converting all names into lowercase 
 def lower(studentlist):
     for name in studentlist:
         studentlist[studentlist.index(name)] = name.lower()
@@ -80,6 +80,7 @@ if __name__ == "__main__":
     lower(doublenamelist)
     lower(studentlist)
 
+<<<<<<< HEAD
     present = checkpresent(studentlist)
     print(present)
     print(len(present))
@@ -123,3 +124,7 @@ if __name__ == "__main__":
     # for i in studentlist:
     #     ws[f"A{rows}"].value = i.capitalize()
     #     rows = rows+1
+=======
+    pres = checkpresent(studentlist)
+    print(len(pres))
+>>>>>>> b2a8c65fab416078890611d6056e32312cf3ebc3
