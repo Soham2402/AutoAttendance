@@ -3,6 +3,10 @@ import numpy as np
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 import os
+from openpyxl import load_workbook, Workbook
+import openpyxl
+import os
+import time
 
 # Capitlizing all names
 def lower(studentlist):
@@ -15,7 +19,7 @@ def loopFiles():
     filelist = os.listdir(os.getcwd())
     imglist = []
     for i in filelist:
-        if i.lower().endswith(('.png','.jpg')):
+        if i.lower().endswith(('.png','.jpg','jpeg')):
                  imglist.append(i)
     return imglist
 
@@ -76,5 +80,46 @@ if __name__ == "__main__":
     lower(doublenamelist)
     lower(studentlist)
 
-    pres = checkpresent(studentlist)
-    print(len(pres))
+    present = checkpresent(studentlist)
+    print(present)
+    print(len(present))
+    
+    wb = load_workbook("Attendance.xlsx")
+
+    #WORKSHEETS
+    # ws = wb["INS"]
+    # ws = wb["STQA"]
+    # ws = wb["WS"]
+    # ws = wb["GP"]
+    # ws = wb["AI"]
+    # ws = wb["GP pracs"]
+    # ws = wb["STQA pracs"]
+    # ws = wb["INS pracs"]
+    # ws = wb["WS pracs"]
+    # ws = wb["AI pracs"]
+    ws = wb["PD pracs"]
+
+    now = time.strftime("%x") #date
+    ws["B2"].value = now
+
+
+
+    #THIS PART MARKS THE STUDENT PRESENT
+    # for i in range(2,111):
+    #     for j in Present:
+    #         if ws[f"A{i}"].value == j:
+    #             ws[f"B{i}"].value = "P"
+
+
+    wb.save("Attendance.xlsx")
+
+
+
+
+    
+    #Incase ub need to add students in a new worksheet
+
+    # rows = 2
+    # for i in studentlist:
+    #     ws[f"A{rows}"].value = i.capitalize()
+    #     rows = rows+1
