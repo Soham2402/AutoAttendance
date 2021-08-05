@@ -3,14 +3,11 @@ How to use:
 2) Upload it in the folder
 3) Add the name of the students in the class the studname list
 
-Features remaining:
-To automate marking students present in excel sheet
-
 Issues to fix:
-Adding functions to mark the attenance of 2 people with same names
+Adding functions to mark the attendance of 2 people with same names
 
-future Iprovements:
-Better image post processing
+Future Iprovements:
+Better image post-processing
 Using regex for better data cleaning 
 
 Future ideas:
