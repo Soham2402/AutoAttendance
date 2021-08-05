@@ -80,7 +80,7 @@ if __name__ == "__main__":
     lower(doublenamelist)
     lower(studentlist)
 
-<<<<<<< HEAD
+
     present = checkpresent(studentlist)
     print(present)
     print(len(present))
@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     #WORKSHEETS
     # ws = wb["INS"]
-    # ws = wb["STQA"]
+    ws = wb["STQA"]
     # ws = wb["WS"]
     # ws = wb["GP"]
     # ws = wb["AI"]
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     # ws = wb["INS pracs"]
     # ws = wb["WS pracs"]
     # ws = wb["AI pracs"]
-    ws = wb["PD pracs"]
+    # ws = wb["PD pracs"]
 
     now = time.strftime("%x") #date
     ws["B2"].value = now
@@ -124,7 +124,6 @@ if __name__ == "__main__":
     # for i in studentlist:
     #     ws[f"A{rows}"].value = i.capitalize()
     #     rows = rows+1
-=======
+
     pres = checkpresent(studentlist)
     print(len(pres))
->>>>>>> b2a8c65fab416078890611d6056e32312cf3ebc3
