@@ -1,3 +1,4 @@
+from re import S
 import cv2
 import numpy as np
 import pytesseract
@@ -48,11 +49,11 @@ def checkpresent(studentlist):
     for studname in studentlist:
         for i in list1:
             seperatlist = i.split()
-            if studname in seperatlist:               
-                present.append(studname.capitalize())
-                break   
-    return present 
-    print(len(present))          
+            for name in range(1,len(seperatlist)):
+                if studname in seperatlist or studname == seperatlist[name-1] +" "+ seperatlist[name]:                    
+                    present.append(studname.capitalize())
+                    break 
+    return present         
 
 
 if __name__ == "__main__":
@@ -62,54 +63,47 @@ if __name__ == "__main__":
                     "Aromal","Mihir","dona","Animesh","Ashwin","rahul",
                     "gayatri","shivam","gladys","eashwar","mahesh","Dineshkumar","Raj",
                     "Yash","Chandrakala","Ramyata","Harish","Soham","Abrial","Jivamani","Sayali","Tejas",
-                    "Bhavana","Bhushan","Arun","Kartik","Pranesh","Ashreen","Raina","Mitesh","Shubhada","Ishita",
+                    "Bhavana","Bhushan","Arun","Kartik","Pranesh","Ashreen","Raina","Mitesh arun","Shubhada","Ishita",
                     "Siddhesh","Nitin","Akash","Sen","Akshara","Pranit","Kevin","Adil","Anees","Devendra","Shoaib",
                     "Muthumari","Ajith","Santhni","Santhni","Harsh","Devika","Rishikesh","Rohit","Somdatt",
-                    "Gauri","Brinda","Harikrishnan","Mahi","Shailesh","Vishnu","Darshan","Amey","Tejal","Ankush","Roshani",
+                    "Gauri","Brinda","Harikrishnan","Mahi","Pillai","Vishnu","Darshan","Amey","Tejal","Ankush","Roshani",
                     "Meenakshi","Sadiya","Aanam","Arman","Shalu","Divyesh","Shrinidhi","Varun","Huda","Vimal","Gautam",
                     "Harshit","Sneha","Shivani","Tejaswin","Sanjana","Sivakumar","Vamshi","Pratik","Mrunali","Rohit",
-                    "Imran","Saikrishna","Hasnain","Kasim","Aftab","Aditya","Amirthavarshini","Hrithik","EASHWER"]
+                    "Imran","Saikrishna","Hasnain","Kasim","Aftab","Aditya","Amirthavarshini","Hrithik","EASHWER","Nadar","pranav""Rutuja Ravindra","Rutuja Rane", "Rutuja Santosh","Shubham Vinod","Shubham Bhalerao",
+                    "Nikhil sharadbabu","Nikhil srinivas","Pranav Salunke","Pranav Bindu"]
 
     
 
     #List of students with the same name
-    doublenamelist = ["Rutuja Ravindra","Rutuja Rane", "Rutuja Santosh","Shubham Vinod","Shubham Bhalerao",
-                    "Nikhil Gurrapu","Nikhil Jindam","Pranav Salunke","Pranav Bindu"]
-
-    ##Turning all text to upper case as all elements in the recognised text will be upper
-    lower(doublenamelist)
-    lower(studentlist)
-
-
-    present = checkpresent(studentlist)
-    print(present)
-    print(len(present))
-    
     wb = load_workbook("Attendance.xlsx")
 
     #WORKSHEETS
-    # ws = wb["INS"]
-    ws = wb["STQA"]
-    # ws = wb["WS"]
-    # ws = wb["GP"]
-    # ws = wb["AI"]
-    # ws = wb["GP pracs"]
-    # ws = wb["STQA pracs"]
-    # ws = wb["INS pracs"]
-    # ws = wb["WS pracs"]
-    # ws = wb["AI pracs"]
-    # ws = wb["PD pracs"]
+    lect = input("Enter the name of the class ").upper()
+
+    ws = wb[lect]
+
+    cell = input("Enter the cell: ")
+
+    print("Please wait while we count attendance for you......")
+    ##Turning all text to upper case as all elements in the recognised text will be upper
+    lower(studentlist)
+
+
+    Present = checkpresent(studentlist)
+    print(Present)
+    print(len(Present))
+    
 
     now = time.strftime("%x") #date
-    ws["B2"].value = now
+    ws[f"{cell}1"].value = now
 
 
 
     #THIS PART MARKS THE STUDENT PRESENT
-    # for i in range(2,111):
-    #     for j in Present:
-    #         if ws[f"A{i}"].value == j:
-    #             ws[f"B{i}"].value = "P"
+    for i in range(2,111):
+        for j in Present:
+            if ws[f"A{i}"].value == j:
+                ws[f"{cell}{i}"].value = "P"
 
 
     wb.save("Attendance.xlsx")
